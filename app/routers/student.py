@@ -30,7 +30,7 @@ def student_dashboard(
             detail="Student not found"
         )
 
-    # ================= Attendance =================
+    #  Attendance 
 
     attendance_records = (
         db.query(Attendance)
@@ -51,8 +51,7 @@ def student_dashboard(
         else 0
     )
 
-    # ================= Grades =================
-
+    #  Grades 
     grades = (
         db.query(Grade)
         .filter(Grade.student_id == student.id)
@@ -60,24 +59,19 @@ def student_dashboard(
     )
 
     total_subjects = len(grades)
-
     obtained_marks = sum(
         grade.marks_obtained
         for grade in grades
     )
-
     maximum_marks = sum(
         grade.total_marks
         for grade in grades
     )
-
     overall_percentage = (
         round((obtained_marks / maximum_marks) * 100, 2)
         if maximum_marks > 0
         else 0
     )
-
-    # ================= Response =================
 
     return {
         "student_name": student.name,
