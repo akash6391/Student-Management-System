@@ -56,18 +56,18 @@ class RoleChecker:
 
         return user
 
-# 1. Single Role Checkers
+#  Single Role Checkers
 allow_admin = RoleChecker(["Admin"])
 allow_teacher = RoleChecker(["Teacher"])
 allow_student = RoleChecker(["Student"])
 allow_parent = RoleChecker(["Parent"])
 
-# 2. Combined Role Checkers (For shared features)
+#  Combined Role Checkers (For shared features)
 # Admin ya Teacher 
 allow_admin_or_teacher = RoleChecker(["Admin", "Teacher"])
 
 # Student aur Parent (jaise Grade card ya Attendance history dekhne ke liye)
 allow_student_or_parent = RoleChecker(["Student", "Parent"])
 
-# 3. Universal Access (System ke kisi bhi logged-in user ke liye, e.g., Profile View)
+#  Universal Access 
 allow_all_roles = RoleChecker(["Admin", "Teacher", "Student", "Parent"])
