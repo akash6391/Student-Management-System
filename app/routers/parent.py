@@ -11,10 +11,7 @@ from app.models.grade import Grade
 
 router = APIRouter(prefix="/parent", tags=["Parent"])
 
-
-# ===========================
 # Parent Dashboard
-# ===========================
 
 @router.get("/dashboard")
 def parent_dashboard(
@@ -40,10 +37,7 @@ def parent_dashboard(
         "total_children": len(parent.children)
     }
 
-
-# ===========================
 # My Children
-# ===========================
 
 @router.get("/my-children")
 def my_children(
@@ -72,10 +66,7 @@ def my_children(
 
     return children
 
-
-# ===========================
 # Attendance
-# ===========================
 
 @router.get("/attendance")
 def child_attendance(
@@ -108,10 +99,7 @@ def child_attendance(
 
     return result
 
-
-# ===========================
 # Grades
-# ===========================
 
 @router.get("/grades")
 def child_grades(
