@@ -7,7 +7,6 @@ from app.dependencies import get_db
 from app.models.user import User
 from app.utils import security
 
-# Yeh FastAPI ko batata hai ki Token kahan se milega (Swagger UI integration ke liye)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 def get_current_user(
@@ -28,7 +27,6 @@ def get_current_user(
             algorithms=[security.ALGORITHM]
         )
 
-        # Token se email aur role nikalo
         email: str = payload.get("user")
 
         if email is None:
@@ -37,7 +35,6 @@ def get_current_user(
     except JWTError:
         raise credentials_exception
 
-    # Database se user nikalo
     user = db.query(User).filter(User.email == email).first()
 
     if user is None:
@@ -59,8 +56,6 @@ class RoleChecker:
 
         return user
 
-# Ready-to-use Role Dependencies
-
 # 1. Single Role Checkers
 allow_admin = RoleChecker(["Admin"])
 allow_teacher = RoleChecker(["Teacher"])
@@ -68,7 +63,7 @@ allow_student = RoleChecker(["Student"])
 allow_parent = RoleChecker(["Parent"])
 
 # 2. Combined Role Checkers (For shared features)
-# Admin ya Teacher (jaise nayi class ya subject add karne ke liye)
+# Admin ya Teacher 
 allow_admin_or_teacher = RoleChecker(["Admin", "Teacher"])
 
 # Student aur Parent (jaise Grade card ya Attendance history dekhne ke liye)
